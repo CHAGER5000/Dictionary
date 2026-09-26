@@ -1,0 +1,409 @@
+{
+  "headword": "bright",
+  "tapped": "bright",
+  "level": "explorer",
+  "found": true,
+  "part_of_speech": "adjective",
+  "pronunciation": {},
+  "sentence": null,
+  "chosen_from_sentence": false,
+  "meanings": [
+    {
+      "synset_id": "oewn-00279417-a",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "emitting or reflecting light readily or in large amounts",
+      "example": "the sun was bright and hot",
+      "synonyms": [
+        {
+          "word": "lustrous",
+          "sources": [
+            "roget1911",
+            "soule1871"
+          ]
+        },
+        {
+          "word": "beamy",
+          "sources": [
+            "roget1911",
+            "soule1871"
+          ]
+        },
+        {
+          "word": "radiant",
+          "sources": [
+            "roget1911",
+            "soule1871"
+          ]
+        },
+        {
+          "word": "brilliant",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "shining",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "shiny",
+          "sources": [
+            "roget1911"
+          ]
+        },
+        {
+          "word": "beaming",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "silvery",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "gleaming",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "splendid",
+          "sources": [
+            "soule1871"
+          ]
+        }
+      ],
+      "antonyms": [
+        {
+          "word": "dull",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": false,
+      "source": "oewn2025",
+      "example_source": "oewn2025"
+    },
+    {
+      "synset_id": "oewn-00403922-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "having strong or striking color",
+      "example": "bright dress",
+      "synonyms": [
+        {
+          "word": "vivid",
+          "sources": [
+            "oewn2025",
+            "roget1911"
+          ]
+        },
+        {
+          "word": "brilliant",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "deep",
+          "sources": [
+            "roget1911"
+          ]
+        }
+      ],
+      "antonyms": [
+        {
+          "word": "colourless",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025"
+    },
+    {
+      "synset_id": "oewn-01338411-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "characterized by quickness and ease in learning",
+      "example": "some children are brighter in one subject than another",
+      "synonyms": [
+        {
+          "word": "smart",
+          "sources": [
+            "oewn2025"
+          ]
+        }
+      ],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-00271888-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "having lots of light either natural or artificial",
+      "example": "the room was bright and airy",
+      "synonyms": [],
+      "antonyms": [
+        {
+          "word": "dark",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-01817522-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "made smooth and bright by or as if by rubbing; reflecting a sheen or glow",
+      "example": "bright silver candlesticks",
+      "synonyms": [
+        {
+          "word": "shiny",
+          "sources": [
+            "oewn2025",
+            "soule1871"
+          ]
+        },
+        {
+          "word": "shining",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "lustrous",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "burnished",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "lucid",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "beaming",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "glowing",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "radiant",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "luminous",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "effulgent",
+          "sources": [
+            "soule1871"
+          ]
+        }
+      ],
+      "antonyms": [
+        {
+          "word": "unpolished",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025"
+    },
+    {
+      "synset_id": "oewn-01125000-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "splendid",
+      "example": "the bright stars of stage and screen",
+      "synonyms": [],
+      "antonyms": [
+        {
+          "word": "inglorious",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-00285796-a",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "not made dim or less bright",
+      "example": "undimmed headlights",
+      "synonyms": [
+        {
+          "word": "undimmed",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "clear",
+          "sources": [
+            "soule1871"
+          ]
+        }
+      ],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-02016784-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "clear and sharp and ringing",
+      "example": "the bright sound of the trumpet section",
+      "synonyms": [
+        {
+          "word": "brilliant",
+          "sources": [
+            "oewn2025"
+          ]
+        }
+      ],
+      "antonyms": [
+        {
+          "word": "unreverberant",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-01152553-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "characterized by happiness or gladness",
+      "example": "bright faces",
+      "synonyms": [],
+      "antonyms": [
+        {
+          "word": "unhappy",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    },
+    {
+      "synset_id": "oewn-00177648-s",
+      "word": "bright",
+      "part_of_speech": "adjective",
+      "definition": "likely to turn out well in the future",
+      "example": "had a bright future in publishing",
+      "synonyms": [
+        {
+          "word": "promising",
+          "sources": [
+            "oewn2025",
+            "soule1871"
+          ]
+        },
+        {
+          "word": "hopeful",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "auspicious",
+          "sources": [
+            "soule1871"
+          ]
+        },
+        {
+          "word": "propitious",
+          "sources": [
+            "soule1871"
+          ]
+        }
+      ],
+      "antonyms": [
+        {
+          "word": "inauspicious",
+          "source": "oewn2025"
+        }
+      ],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025"
+    },
+    {
+      "synset_id": "oewn-00077434-r",
+      "word": "bright",
+      "part_of_speech": "adverb",
+      "definition": "with brightness",
+      "example": "the stars shone brilliantly",
+      "synonyms": [
+        {
+          "word": "brilliantly",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "brightly",
+          "sources": [
+            "oewn2025"
+          ]
+        }
+      ],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": []
+    }
+  ],
+  "more_meanings": 0,
+  "sources": {
+    "oewn2025": "Open English Wordnet (2025 edition), by the Open English WordNet team, https://github.com/globalwordnet/english-wordnet, licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/. Copyright (c) 2019-present, The Open English WordNet Team. This work is based on or incorporates elements of the Princeton University WordNet database.",
+    "roget1911": "Roget's Thesaurus of English Words and Phrases, 1911 edition (Peter Mark Roget, John Lewis Roget, Samuel Romilly Roget); public domain.",
+    "soule1871": "Richard Soule, A Dictionary of English Synonymes (1871); public domain."
+  }
+}

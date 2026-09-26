@@ -1,0 +1,163 @@
+{
+  "headword": "bank",
+  "tapped": "bank",
+  "level": "junior",
+  "found": true,
+  "part_of_speech": "noun",
+  "pronunciation": {},
+  "sentence": "The little boat drifted slowly towards the bank, where the ducks were waiting.",
+  "chosen_from_sentence": true,
+  "meanings": [
+    {
+      "synset_id": "oewn-09236472-n",
+      "word": "bank",
+      "part_of_speech": "noun",
+      "definition": "sloping land (especially the slope beside a body of water)",
+      "example": "they pulled the canoe up on the bank",
+      "synonyms": [],
+      "antonyms": [],
+      "folded": false,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": [
+        {
+          "word": "riverbank",
+          "relation": "more specific",
+          "source": "oewn2025"
+        },
+        {
+          "word": "waterside",
+          "relation": "more specific",
+          "source": "oewn2025"
+        },
+        {
+          "word": "slope",
+          "relation": "more general",
+          "source": "oewn2025"
+        }
+      ],
+      "clues": [
+        "boat",
+        "drifted"
+      ],
+      "clue_links": [
+        {
+          "clue": "boat",
+          "matched": "water",
+          "via": "definition, through the clue's own meaning",
+          "channel": "indirect"
+        },
+        {
+          "clue": "drifted",
+          "matched": "current",
+          "via": "example, through the clue's own meaning",
+          "channel": "indirect"
+        }
+      ],
+      "fit_score": 9.842,
+      "margin_over_next": 2.969
+    },
+    {
+      "synset_id": "oewn-08437235-n",
+      "word": "bank",
+      "part_of_speech": "noun",
+      "definition": "a financial institution that accepts deposits and channels the money into lending activities",
+      "example": "he cashed a check at the bank",
+      "synonyms": [
+        {
+          "word": "banking company",
+          "sources": [
+            "oewn2025"
+          ]
+        },
+        {
+          "word": "banking concern",
+          "sources": [
+            "oewn2025"
+          ]
+        }
+      ],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": [
+        {
+          "word": "acquirer",
+          "relation": "more specific",
+          "source": "oewn2025"
+        }
+      ]
+    },
+    {
+      "synset_id": "oewn-09236341-n",
+      "word": "bank",
+      "part_of_speech": "noun",
+      "definition": "a long ridge or pile",
+      "example": "a huge bank of earth",
+      "synonyms": [],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": [
+        {
+          "word": "bluff",
+          "relation": "more specific",
+          "source": "oewn2025"
+        },
+        {
+          "word": "sandbank",
+          "relation": "more specific",
+          "source": "oewn2025"
+        },
+        {
+          "word": "ridge",
+          "relation": "more general",
+          "source": "oewn2025"
+        }
+      ]
+    },
+    {
+      "synset_id": "oewn-08479077-n",
+      "word": "bank",
+      "part_of_speech": "noun",
+      "definition": "an arrangement of similar objects in a row or in tiers",
+      "example": "he operated a bank of switches",
+      "synonyms": [],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "example_source": "oewn2025",
+      "related": [
+        {
+          "word": "array",
+          "relation": "more general",
+          "source": "oewn2025"
+        }
+      ]
+    },
+    {
+      "synset_id": "oewn-13389491-n",
+      "word": "bank",
+      "part_of_speech": "noun",
+      "definition": "a supply or stock held in reserve for future use (especially in emergencies)",
+      "example": null,
+      "synonyms": [],
+      "antonyms": [],
+      "folded": true,
+      "source": "oewn2025",
+      "related": [
+        {
+          "word": "reserve",
+          "relation": "more general",
+          "source": "oewn2025"
+        }
+      ]
+    }
+  ],
+  "more_meanings": 13,
+  "sources": {
+    "oewn2025": "Open English Wordnet (2025 edition), by the Open English WordNet team, https://github.com/globalwordnet/english-wordnet, licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/. Copyright (c) 2019-present, The Open English WordNet Team. This work is based on or incorporates elements of the Princeton University WordNet database."
+  }
+}
