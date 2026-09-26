@@ -1,0 +1,5 @@
+sources/*
+!sources/.keep
+data/*.sqlite
+data/*.jsonl
+__pycache__/
