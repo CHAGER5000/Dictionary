@@ -1,4 +1,4 @@
-# Kids' dictionary and thesaurus: data pipeline
+# Kids' dictionary and thesaurus
 
 An offline dictionary and thesaurus for children aged 6 to 14, with two levels,
 Junior and Explorer. It is built for iPad first, since that is what schools
@@ -27,12 +27,18 @@ the sources and NOTICE.md for the attribution the app must show.
 | `pipeline/soule.py` | Soule 1871 → `data/soule.jsonl` |
 | `pipeline/roget.py` | Roget 1911 → `data/roget.jsonl` |
 | `pipeline/oewn.py` | Open English WordNet XML → `data/oewn.sqlite`, plus a lookup API and lemmatiser |
-| `pipeline/build.py` | everything above → **`data/english.sqlite`**, the app's data file, and `data/english_audit.sqlite`, for review only |
+| `pipeline/build.py` | everything above → **`data/english.sqlite`**, the full English database, and `data/english_audit.sqlite`, for review only |
+| `pipeline/appdb.py` | `data/english.sqlite` → **`data/app_en.sqlite`**, the compact file the app ships (about 96 MB), and `app_pick`, the reference for the app's meaning picker |
 | `pipeline/context.py` | `pick_sense(conn, sentence, word, at=None)`: the context sense picker |
 | `pipeline/entry.py` | `word_entry(conn, word, sentence=None, level=..., at=None)`: the word screen as a dict; writes the demo files |
 | `pipeline/evaluate.py` | accuracy of the picker on `tests/data/wsd_eval.jsonl` |
 | `data/demo_bank.json`, `data/demo_bright.json` | example screens (committed) |
 | `tests/` | unit tests and the sense evaluation set |
+| `KidsDictionary/` | the iPad and iPhone app (SwiftUI, iOS 17); `KidsDictionary/Core` is the dictionary logic |
+| `KidsDictionary.xcodeproj` | the Xcode project (the folder is a synchronised group: every file in it is built) |
+| `Package.swift`, `SwiftTests/` | `KidsDictionary/Core` as a Swift package, tested with `swift test` on a Mac |
+| `codemagic.yaml` | Codemagic builds: `check` (tests and an unsigned build) and `testflight` |
+| `tools/make_icon.py` | draws the placeholder app icon |
 
 `data/*.sqlite`, `data/*.jsonl` and the build's temporary `data/*.tmp` files
 are build outputs and are git-ignored.
@@ -248,3 +254,76 @@ word was tapped.
 - **Size:** 121 MB is fine for an iPad but large for a phone.
 - Soule's American spellings stay as printed ("labor"). The screen swaps only
   WordNet's own American spellings for British ones.
+
+## The app
+
+`KidsDictionary/` is the app, iPad first and iPhone too, working fully offline.
+
+- **Read**: snap a book page with the document camera, or choose a photo. The
+  words are read on the device (Vision), every word on the page can be tapped
+  (finger or Apple Pencil), and the meaning that fits its sentence appears beside
+  the page on iPad or in a sheet on iPhone, with the clues, a similar-words list
+  for that meaning only, and the other meanings folded away.
+- **Look up**: type, dictate, or write with Apple Pencil (Scribble works in the
+  search field). A misspelt word gets "Did you mean" from how it sounds
+  ("nolij" finds knowledge) and from close spellings.
+- **Word page**: all meanings, each in its own colour, with an example, similar
+  words and opposites for the chosen one; Junior shows fewer meanings and words.
+- **My Words**: saved words with the meaning and sentence they came from
+  (SwiftData, only on the device; on a shared school iPad, per child).
+- **Settings**: Junior or Explorer, and the credits the WordNet licence requires.
+
+The app opens `KidsDictionary/Resources/app_en.sqlite` read-only. That file is not
+in git: build it with `python3 -m pipeline.appdb` and copy it there, as the
+Codemagic build does:
+
+```
+sh pipeline/fetch_sources.sh
+python3 -m pipeline.build
+python3 -m pipeline.appdb --eval        # also prints the picker's accuracy
+cp data/app_en.sqlite KidsDictionary/Resources/
+```
+
+### The on-device meaning picker
+
+The full picker in `pipeline/context.py` follows WordNet relations at lookup
+time, which is too much for the app. `pipeline/appdb.py` precomputes instead:
+
+- for every meaning, its 60 strongest clue words with their weights (from the
+  definition, examples, synonyms, related meanings and old-book synonyms, each
+  multiplied by how rare the word is);
+- for every word, what its own meanings talk about ("boat" → water, vessel …),
+  so a sentence word can point to a meaning through its own meaning;
+- the word lists for simple part-of-speech hints ("the bank" is a noun, "we can
+  bank" a verb, "so bright" an adjective).
+
+`app_pick` in `pipeline/appdb.py` is the specification, and
+`KidsDictionary/Core/MeaningPicker.swift` does the same arithmetic. Both are
+tested on one shared fixture (the SQL in
+`SwiftTests/DictionaryCoreTests/DictionaryCoreTests.swift`, which
+`tests/test_appdb.py` reads), with the same expected scores.
+
+On the test sentences (`python3 -m pipeline.appdb --eval`, never tuned on):
+
+| | right meaning first | right meaning in top 3 |
+|---|---|---|
+| app picker (test, 80 sentences) | 63.7% | 82.5% |
+| app picker (dev, 36 sentences) | 55.6% | 86.1% |
+| full Python picker (test) | 62.5% | 85.0% |
+
+### Build and TestFlight
+
+The `check` workflow runs the Python tests, builds the database, runs
+`swift test` and makes an unsigned build. The code was written without a
+compiler at hand, so run `check` first and expect a round of fixes. Then:
+
+1. Register the App ID `com.chager5000.dictionary` in the Apple Developer site.
+2. Create the app in App Store Connect with that bundle ID. The display name is
+   a placeholder ("Dictionary") until the name is chosen; change
+   `INFOPLIST_KEY_CFBundleDisplayName` in the project.
+3. In Codemagic, add this repository and give it the `appstore` group with the
+   same four secret variables as LocalLedger and ReceiptVault.
+4. Run the `testflight` workflow.
+
+App privacy in App Store Connect: Data Not Collected. For the Kids category the
+app has no ads, analytics or links out.

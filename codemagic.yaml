@@ -1,0 +1,106 @@
+# Codemagic builds (codemagic.io). Start a build from the Codemagic app page.
+#
+# One-time setup: on the app's "Environment variables" tab, add the "appstore"
+# group with the same four secret variables LocalLedger and ReceiptVault use:
+#   APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER,
+#   APP_STORE_CONNECT_PRIVATE_KEY, CERTIFICATE_PRIVATE_KEY
+#
+# The dictionary database (about 80 MB) is not kept in git: every build
+# downloads the public sources and builds it with the Python pipeline, then
+# copies it into the app. The sources are cached between builds.
+
+definitions:
+  scripts:
+    - &no_network
+      name: No network code in the app
+      script: |
+        status=0
+        grep -rnE 'URLSession|NSURLConnection|URLRequest|NWConnection|NWPathMonitor|import Network|import WebKit|WKWebView|SFSafariViewController|import SafariServices|import StoreKit|import CloudKit|Firebase|https?://' KidsDictionary --include='*.swift' || status=$?
+        if [ "$status" -eq 0 ]; then
+          echo "Network code or a URL was found (lines above). The app must work fully offline."
+          exit 1
+        elif [ "$status" -ne 1 ]; then
+          echo "The network check could not search KidsDictionary/ (grep exit $status)."
+          exit 1
+        fi
+        echo "No network code."
+    - &dictionary_data
+      name: Build the dictionary database
+      script: |
+        set -e
+        python3 - <<'PY'
+        import sys
+        if sys.version_info < (3, 10):
+            sys.exit(f"The data pipeline needs Python 3.10 or newer; this machine has {sys.version.split()[0]}.")
+        print("Python", sys.version.split()[0])
+        PY
+        # sources are cached between builds; download them only if missing or changed
+        (cd sources && shasum -a 256 -c ../pipeline/sources.sha256 --status 2>/dev/null) || sh pipeline/fetch_sources.sh
+        python3 -m pipeline.build
+        python3 -m pipeline.appdb --eval
+        cp data/app_en.sqlite KidsDictionary/Resources/app_en.sqlite
+        ls -la KidsDictionary/Resources/
+    - &core_tests
+      name: Tests (Python pipeline and Swift core)
+      script: |
+        set -e
+        python3 -m unittest discover -s tests
+        swift test
+
+workflows:
+  testflight:
+    name: TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    cache:
+      cache_paths:
+        - $CM_BUILD_DIR/sources
+    environment:
+      xcode: latest
+      groups:
+        - appstore
+      vars:
+        BUNDLE_ID: com.chager5000.dictionary
+    scripts:
+      - *no_network
+      - *dictionary_data
+      - *core_tests
+      - name: Build number
+        script: |
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/" KidsDictionary.xcodeproj/project.pbxproj
+      - name: Signing certificate and profile
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          keychain add-certificates
+          xcode-project use-profiles
+      - name: Build signed app
+        script: xcode-project build-ipa --project KidsDictionary.xcodeproj --scheme KidsDictionary
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: true
+
+  check:
+    name: Tests and unsigned build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    cache:
+      cache_paths:
+        - $CM_BUILD_DIR/sources
+    environment:
+      xcode: latest
+    scripts:
+      - *no_network
+      - *dictionary_data
+      - *core_tests
+      - name: Build (unsigned)
+        script: |
+          set -o pipefail
+          xcodebuild build -project KidsDictionary.xcodeproj -scheme KidsDictionary -configuration Release \
+            -destination 'generic/platform=iOS' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" | tail -60

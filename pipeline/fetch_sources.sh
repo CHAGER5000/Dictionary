@@ -7,4 +7,8 @@ for id in 22 28900 37683 38390 51155 73237; do
 done
 curl -fsSL -o english-wordnet-2025.xml.gz \
   https://github.com/globalwordnet/english-wordnet/releases/download/2025-edition/english-wordnet-2025.xml.gz
-sha256sum -c ../pipeline/sources.sha256
+if command -v sha256sum >/dev/null 2>&1; then
+  sha256sum -c ../pipeline/sources.sha256
+else
+  shasum -a 256 -c ../pipeline/sources.sha256     # macOS
+fi

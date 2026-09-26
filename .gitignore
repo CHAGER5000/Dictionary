@@ -4,3 +4,12 @@ data/*.sqlite
 data/*.jsonl
 data/*.tmp
 __pycache__/
+data/*.gz
+KidsDictionary/Resources/app_en.sqlite
+.DS_Store
+xcuserdata/
+DerivedData/
+build/
+.build/
+.swiftpm/
+*.xcuserstate
